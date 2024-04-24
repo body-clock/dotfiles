@@ -1,1 +1,22 @@
-/Users/pperkins/.ideavimrc
+runtime macros/matchit.vim
+
+" this is a comment
+
+set surround
+set easymotion
+
+let mapleader = " "
+
+nmap <leader>d <C-d>
+nmap <leader>u <C-u>
+vmap <leader>d <C-d>
+vmap <leader>u <C-u>
+
+nmap <leader>h :action PreviousTab<CR>
+nmap <leader>l :action NextTab<CR>
+nmap <leader>m :action NextSplitter<CR>
+nmap <leader>n :action PrevSplitter<CR>
+nmap <leader>bd :action CloseEditor<CR>
+nmap <leader>t :action ActivateTerminalToolWindow<CR>
+nmap <leader>z :action ToggleDistractionFreeMode<CR>
+nnoremap <leader><leader> <C-Tab>
