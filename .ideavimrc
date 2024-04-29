@@ -1,9 +1,6 @@
-runtime macros/matchit.vim
-
-" this is a comment
-
 set surround
 set easymotion
+set matchit
 
 let mapleader = " "
 
