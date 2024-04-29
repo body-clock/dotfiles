@@ -8,7 +8,6 @@ plugins=(git rails)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-export PATH="$HOME/.rbenv/shims:$PATH"
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 export PYENV_ROOT="$HOME/.pyenv"
 export PGGSSENCMODE="disable"
@@ -32,4 +31,10 @@ alias copspec="bundle exec rubocop; bundle exec rspec"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(starship init zsh)"
-eval "$(rbenv init - zsh)"
+
+# asdf config
+. "$HOME/.asdf/asdf.sh"
+# append completions to fpath
+fpath=(${ASDF_DIR}/completions $fpath)
+# initialise completions with ZSH's compinit
+autoload -Uz compinit && compinit
