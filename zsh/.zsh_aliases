@@ -1,5 +1,7 @@
 # Aliases
 alias zshconfig="nvim ~/.zshrc"
+alias nvconfig="nvim ~/.config/nvim/init.lua"
+alias sourcez="source ~/.zshrc"
 alias work="cd ~/code/w/"
 alias apo="cd ~/code/w/apotheca"
 alias vc="cd ~/code/w/VisualCollation"
