@@ -1,0 +1,12 @@
+export ZSH="$HOME/.oh-my-zsh"
+
+ZSH_THEME="robbyrussell"
+ALIAS_CONFIG=~/.zsh_aliases
+
+plugins=(git)
+
+source $ZSH/oh-my-zsh.sh
+source $ALIAS_CONFIG
+
+eval "$(starship init zsh)"
+eval "$(~/.local/bin/mise activate zsh)"
