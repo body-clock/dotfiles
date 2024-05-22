@@ -1,19 +1,39 @@
-set surround
-set easymotion
-set matchit
+" plugins
+Plug 'preservim/nerdtree'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'machakann/vim-highlightedyank'
+Plug 'chrisbra/matchit'
+
+set clipboard=unnamedplus
+set quickscope
+set scrolloff=10
 
 let mapleader = " "
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
-nmap <leader>d <C-d>
-nmap <leader>u <C-u>
-vmap <leader>d <C-d>
-vmap <leader>u <C-u>
-
+" navigation
+nmap <leader>fs :action FileStructurePopup<CR>
 nmap <leader>h :action PreviousTab<CR>
 nmap <leader>l :action NextTab<CR>
-nmap <leader>m :action NextSplitter<CR>
-nmap <leader>n :action PrevSplitter<CR>
-nmap <leader>bd :action CloseEditor<CR>
+nmap <C-h> :action PrevSplitter<CR>
+nmap <C-l> :action NextSplitter<CR>
 nmap <leader>t :action ActivateTerminalToolWindow<CR>
 nmap <leader>z :action ToggleDistractionFreeMode<CR>
-nnoremap <leader><leader> <C-Tab>
+nmap <leader>sf :action GotoFile<CR>
+nmap <leader>sg :action FindInPath<CR>
+
+" reformat code
+nmap <leader>f :action ReformatCode<CR>
+
+" breakpoints
+nmap <leader>b :action ToggleLineBreakpoint<CR>
+
+" harpoon actions
+nmap <leader>a :action AddToHarpoon<CR>
+nmap <leader>e :action ShowHarpoon<CR>
+nmap <leader>1 :action GotoHarpoon1<CR>
+nmap <leader>2 :action GotoHarpoon2<CR>
+nmap <leader>3 :action GotoHarpoon3<CR>
+nmap <leader>4 :action GotoHarpoon4<CR>
+nmap <leader>5 :action GotoHarpoon5<CR>
