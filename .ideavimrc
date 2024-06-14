@@ -8,6 +8,7 @@ Plug 'chrisbra/matchit'
 set clipboard=unnamedplus
 set quickscope
 set scrolloff=10
+set relativenumber
 
 let mapleader = " "
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
