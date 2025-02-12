@@ -4,3 +4,6 @@
 [submodule "nvim-bodyclock"]
 	path = nvim-bodyclock
 	url = https://github.com/body-clock/nvim-bodyclock
+[submodule "bodyclock.nvim"]
+	path = bodyclock.nvim
+	url = https://github.com/body-clock/bodyclock.nvim
