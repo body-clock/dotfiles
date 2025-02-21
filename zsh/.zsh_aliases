@@ -1,7 +1,7 @@
 # Aliases
 alias zshconf="nvim ~/.zshrc"
 alias aliconf="nvim ~/.zsh_aliases"
-alias nvconf="nvim ~/.config/nvim/init.lua"
+alias nvconf="cd .config/nvim; nvim ."
 alias sourcez="source ~/.zshrc"
 alias code="cd ~/code"
 alias work="cd ~/code/w/"
@@ -22,3 +22,4 @@ alias cop="bundle exec rubocop"
 alias spec="bundle exec rspec"
 alias copspec="bundle exec rubocop; bundle exec rspec"
 alias cat="bat"
+alias zzz="pmset sleepnow"
