@@ -1,0 +1,3 @@
+[tools]
+neovim = "nightly"
+ruby = "latest"
