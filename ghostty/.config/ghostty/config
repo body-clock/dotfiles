@@ -1,0 +1,9 @@
+font-size = 14
+font-family = Jetbrains Mono SemiBold
+font-style = Semibold
+font-style-bold = ExtraBold
+font-style-italic = SemiBold Italic
+font-style-bold-italic = ExtraBold Italic
+
+theme = "tinted-theming"
+window-decoration = false
