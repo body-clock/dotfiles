@@ -1,14 +1,17 @@
-# [[items]]
-# path = "https://github.com/tinted-theming/tinted-terminal"
-# name = "tinted-terminal-kitty"
-# themes-dir = "themes/kitty"
-# hook = "kitten @ load-config"
-# supported-systems = ["base16", "base24"]
-#
+# Global settings
+shell = "zsh -c '{}'"             # This tells Tinty how to run hooks
+default-scheme = "base16-tarot"      # Default theme when none is specified
+
+# ghostty
 [[items]]
-path = "https://github.com/tinted-theming/tinted-terminal"
-name = "tinted-terminal-ghostty"
-themes-dir = "themes/ghostty"
-# With `theme` set to "tinted-theming", this will be where Ghostty looks for the theme file:
+path = "https://github.com/tinted-theming/tinted-terminal"    
+name = "tinted-ghostty"
 hook = "command cp -f %f ~/.config/ghostty/themes/tinted-theming"
-supported-systems = ["base16", "base24"]
+themes-dir = "themes/ghostty"              
+
+# tmux
+[[items]]
+path = "https://github.com/tinted-theming/tinted-tmux"
+name = "tinted-tmux"
+hooks = ["tmux source-file ~/.config/tmux/tmux.conf"]
+themes-dir = "colors"
