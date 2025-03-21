@@ -5,5 +5,8 @@ font-style-bold = ExtraBold
 font-style-italic = SemiBold Italic
 font-style-bold-italic = ExtraBold Italic
 
+# background-opacity = 0.85
+# background-blur = true
+
 theme = "tinted-theming"
 window-decoration = false
