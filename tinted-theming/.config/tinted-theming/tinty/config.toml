@@ -6,12 +6,12 @@ default-scheme = "base16-tarot"      # Default theme when none is specified
 [[items]]
 path = "https://github.com/tinted-theming/tinted-terminal"    
 name = "tinted-ghostty"
-hook = "command cp -f %f ~/.config/ghostty/themes/tinted-theming"
+hook = "cp -f %f ~/.config/ghostty/themes/tinted-theming && osascript ~/.config/ghostty/reload.scpt >/dev/null"
 themes-dir = "themes/ghostty"              
 
 # tmux
 [[items]]
 path = "https://github.com/tinted-theming/tinted-tmux"
 name = "tinted-tmux"
-hooks = ["tmux source-file ~/.config/tmux/tmux.conf"]
+hook = "tmux source-file ~/.config/tmux/tmux.conf"
 themes-dir = "colors"
