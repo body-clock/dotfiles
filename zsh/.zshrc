@@ -27,8 +27,8 @@ export TINTED_TMUX_OPTION_ACTIVE=1
 export TINTED_TMUX_OPTION_STATUSBAR=1
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
-# eval "$(starship init zsh)"
 eval "$(~/.local/bin/mise activate zsh)"
+eval "$(~/.local/share/mise/shims/zoxide init zsh)"
 source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
 source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
