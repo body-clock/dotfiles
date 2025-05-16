@@ -31,6 +31,8 @@ eval "$(~/.local/bin/mise activate zsh)"
 eval "$(~/.local/share/mise/shims/zoxide init zsh)"
 source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
 source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
