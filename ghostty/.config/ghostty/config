@@ -3,5 +3,9 @@ font-family = Rec Mono Duotone
 font-thicken = true
 font-thicken-strength = 100
 
+copy-on-select = clipboard
+
 theme = "tinted-theming"
 window-decoration = false
+background-opacity = 0.85
+background-blur-radius = 70

@@ -2,6 +2,7 @@
 deno = "latest"
 hugo = "latest"
 neovim = "0.11"
+npm = "11.4.2"
 ruby = "latest"
 zig = "latest"
 zoxide = "latest"

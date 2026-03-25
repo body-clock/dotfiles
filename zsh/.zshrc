@@ -30,7 +30,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(~/.local/bin/mise activate zsh)"
 eval "$(~/.local/share/mise/shims/zoxide init zsh)"
 source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
-source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+# source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
 
