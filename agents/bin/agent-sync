@@ -105,9 +105,11 @@ while IFS= read -r line || [ -n "$line" ]; do
   fi
 
   # Check: symlink already correct (idempotent)
+  SYMLINK_CORRECT=false
   if [ -L "$REPO_TARGET" ]; then
     CURRENT_TARGET=$(readlink "$REPO_TARGET")
     if [ "$CURRENT_TARGET" = "$STORE_FILE" ]; then
+      SYMLINK_CORRECT=true
       echo "  OK: Symlink already correct"
       # Still ensure exclude entry exists
     else
@@ -117,11 +119,14 @@ while IFS= read -r line || [ -n "$line" ]; do
 
   # Action: create/replace symlink
   if [ "$DRY_RUN" = true ]; then
-    if [ -L "$REPO_TARGET" ] && [ "$(readlink "$REPO_TARGET")" = "$STORE_FILE" ]; then
+    if [ "$SYMLINK_CORRECT" = true ]; then
       echo "  [dry-run] No action needed (symlink already correct)"
     else
       echo "  [dry-run] Would create symlink: $REPO_TARGET -> $STORE_FILE"
     fi
+  elif [ "$SYMLINK_CORRECT" = true ]; then
+    # Skip - symlink already correct
+    :
   else
     ln -sf "$STORE_FILE" "$REPO_TARGET"
     echo "  Created symlink: $REPO_TARGET -> $STORE_FILE"
