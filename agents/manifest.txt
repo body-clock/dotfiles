@@ -9,3 +9,4 @@
 milkcrate  /Users/pperkins/code/p/milkcrate  AGENTS.md
 bodyclock-fm  /Users/pperkins/code/p/bodyclock.fm  AGENTS.md
 clover-iiif  /Users/pperkins/code/w/clover-iiif  AGENTS.md
+finding-aids  /Users/pperkins/code/w/finding-aids  rails_app/AGENTS.md
