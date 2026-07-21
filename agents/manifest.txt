@@ -6,6 +6,6 @@
 # repo_path: absolute path to the project repo
 # filename: agent filename (e.g., AGENTS.md, CLAUDE.md)
 
-milkcrate  /Users/pperkins/code/milkcrate  AGENTS.md
-bodyclock-fm  /Users/pperkins/code/bodyclock.fm  AGENTS.md
-clover-iiif  /Users/pperkins/code/clover-iiif  AGENTS.md
+milkcrate  /Users/pperkins/code/p/milkcrate  AGENTS.md
+bodyclock-fm  /Users/pperkins/code/p/bodyclock.fm  AGENTS.md
+clover-iiif  /Users/pperkins/code/w/clover-iiif  AGENTS.md
