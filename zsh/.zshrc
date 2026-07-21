@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 export ZSH="$HOME/.oh-my-zsh"
-export TERM="xterm-256color"
+[ -z "$TMUX" ] && export TERM="xterm-256color"
 
 ZSH_THEME="robbyrussell"
 ALIAS_CONFIG=~/.zsh_aliases
@@ -36,3 +36,20 @@ source <(fzf --zsh)
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# opencode
+export PATH=/Users/pperkins/.opencode/bin:$PATH
+
+# Added by Antigravity
+export PATH="/Users/pperkins/.antigravity/antigravity/bin:$PATH"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/pperkins/.lmstudio/bin"
+# End of LM Studio CLI section
+
+
+# mimocode
+export PATH=/Users/pperkins/.mimocode/bin:$PATH
+
+# agent-sync
+export PATH="/Users/pperkins/dotfiles/agents/bin:$PATH"

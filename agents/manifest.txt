@@ -1,0 +1,11 @@
+# Agent File Sync Manifest
+# Format: <name>  <absolute-path-to-repo>  <filename>
+# Lines starting with # and empty lines are ignored.
+#
+# name: project name (must match directory name in ~/.agent-store)
+# repo_path: absolute path to the project repo
+# filename: agent filename (e.g., AGENTS.md, CLAUDE.md)
+
+milkcrate  /Users/pperkins/code/milkcrate  AGENTS.md
+bodyclock-fm  /Users/pperkins/code/bodyclock.fm  AGENTS.md
+clover-iiif  /Users/pperkins/code/clover-iiif  AGENTS.md
