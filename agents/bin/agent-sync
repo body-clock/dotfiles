@@ -1,0 +1,175 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# agent-sync - Sync agent files from ~/.agent-store to project repos via symlinks
+# Usage:
+#   agent-sync              - Sync all projects in manifest
+#   agent-sync <name>       - Sync only the named project
+#   agent-sync --dry-run    - Print what would change without applying
+#   agent-sync --list       - Print all manifest entries
+
+STORE_DIR="$HOME/.agent-store"
+MANIFEST="$HOME/dotfiles/agents/manifest.txt"
+DRY_RUN=false
+LIST_ONLY=false
+FILTER_NAME=""
+
+# Parse arguments
+for arg in "$@"; do
+  case "$arg" in
+    --dry-run) DRY_RUN=true ;;
+    --list) LIST_ONLY=true ;;
+    --help|-h)
+      echo "Usage: agent-sync [--dry-run|--list|<project-name>]"
+      exit 0
+      ;;
+    -*) echo "Unknown option: $arg"; exit 1 ;;
+    *) FILTER_NAME="$arg" ;;
+  esac
+done
+
+# Ensure manifest exists
+if [ ! -f "$MANIFEST" ]; then
+  echo "Error: Manifest not found at $MANIFEST"
+  exit 1
+fi
+
+# Ensure store dir exists
+if [ ! -d "$STORE_DIR" ]; then
+  echo "Error: Store directory not found at $STORE_DIR"
+  echo "Clone the agent-store repo: git clone https://github.com/body-clock/agent-store.git ~/.agent-store"
+  exit 1
+fi
+
+# List mode
+if [ "$LIST_ONLY" = true ]; then
+  echo "Manifest entries:"
+  while IFS= read -r line || [ -n "$line" ]; do
+    # Skip empty lines and comments
+    [[ -z "$line" || "$line" =~ ^[[:space:]]*# ]] && continue
+    # Parse: name  repo_path  filename
+    read -r name repo_path filename <<< "$line"
+    echo "  $name  $repo_path  $filename"
+  done < "$MANIFEST"
+  exit 0
+fi
+
+# Track if any changes were made
+CHANGES_MADE=false
+WARNINGS=false
+
+# Process each manifest entry
+while IFS= read -r line || [ -n "$line" ]; do
+  # Skip empty lines and comments
+  [[ -z "$line" || "$line" =~ ^[[:space:]]*# ]] && continue
+
+  # Parse: name  repo_path  filename
+  read -r name repo_path filename <<< "$line"
+
+  # Filter by name if specified
+  if [ -n "$FILTER_NAME" ] && [ "$name" != "$FILTER_NAME" ]; then
+    continue
+  fi
+
+  STORE_FILE="$STORE_DIR/$name/$filename"
+  REPO_TARGET="$repo_path/$filename"
+
+  echo "--- Processing: $name ($filename) ---"
+
+  # Check: store file must exist
+  if [ ! -e "$STORE_FILE" ]; then
+    echo "  WARNING: Store file not found: $STORE_FILE"
+    WARNINGS=true
+    continue
+  fi
+
+  # Check: repo must exist
+  if [ ! -d "$repo_path" ]; then
+    echo "  WARNING: Repo directory not found: $repo_path"
+    WARNINGS=true
+    continue
+  fi
+
+  # Check: target is git-tracked (safety gate)
+  if git -C "$repo_path" ls-files --error-unmatch "$filename" >/dev/null 2>&1; then
+    echo "  SKIP: $REPO_TARGET is git-tracked. Run 'git rm --cached $filename' first."
+    WARNINGS=true
+    continue
+  fi
+
+  # Check: target exists and is a real file (not a symlink)
+  if [ -e "$REPO_TARGET" ] && [ ! -L "$REPO_TARGET" ]; then
+    echo "  WARNING: $REPO_TARGET exists and is a real file (not a symlink). Not overwriting."
+    WARNINGS=true
+    continue
+  fi
+
+  # Check: symlink already correct (idempotent)
+  SYMLINK_CORRECT=false
+  if [ -L "$REPO_TARGET" ]; then
+    CURRENT_TARGET=$(readlink "$REPO_TARGET")
+    if [ "$CURRENT_TARGET" = "$STORE_FILE" ]; then
+      SYMLINK_CORRECT=true
+      echo "  OK: Symlink already correct"
+      # Still ensure exclude entry exists
+    else
+      echo "  INFO: Symlink exists but points to $CURRENT_TARGET"
+    fi
+  fi
+
+  # Action: create/replace symlink
+  if [ "$DRY_RUN" = true ]; then
+    if [ "$SYMLINK_CORRECT" = true ]; then
+      echo "  [dry-run] No action needed (symlink already correct)"
+    else
+      echo "  [dry-run] Would create symlink: $REPO_TARGET -> $STORE_FILE"
+    fi
+  elif [ "$SYMLINK_CORRECT" = true ]; then
+    # Skip - symlink already correct
+    :
+  else
+    ln -sf "$STORE_FILE" "$REPO_TARGET"
+    echo "  Created symlink: $REPO_TARGET -> $STORE_FILE"
+    CHANGES_MADE=true
+  fi
+
+  # Action: ensure .git/info/exclude entry
+  EXCLUDE_FILE="$repo_path/.git/info/exclude"
+  mkdir -p "$(dirname "$EXCLUDE_FILE")"
+
+  if [ ! -f "$EXCLUDE_FILE" ]; then
+    if [ "$DRY_RUN" = true ]; then
+      echo "  [dry-run] Would create $EXCLUDE_FILE with entry: $filename"
+    else
+      echo "$filename" > "$EXCLUDE_FILE"
+      echo "  Created $EXCLUDE_FILE with entry: $filename"
+      CHANGES_MADE=true
+    fi
+  elif ! grep -q "^$filename$" "$EXCLUDE_FILE" 2>/dev/null; then
+    if [ "$DRY_RUN" = true ]; then
+      echo "  [dry-run] Would append to $EXCLUDE_FILE: $filename"
+    else
+      echo "$filename" >> "$EXCLUDE_FILE"
+      echo "  Appended to $EXCLUDE_FILE: $filename"
+      CHANGES_MADE=true
+    fi
+  else
+    echo "  OK: $EXCLUDE_FILE already contains: $filename"
+  fi
+
+done < "$MANIFEST"
+
+# Summary
+echo ""
+if [ "$DRY_RUN" = true ]; then
+  echo "Dry run complete. No changes made."
+elif [ "$CHANGES_MADE" = true ]; then
+  echo "Sync complete. Changes were made."
+else
+  echo "Sync complete. All entries up to date."
+fi
+
+if [ "$WARNINGS" = true ]; then
+  echo ""
+  echo "Warnings were issued. Review the output above."
+fi
