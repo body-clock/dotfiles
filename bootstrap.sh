@@ -48,7 +48,7 @@ brew bundle --file="$DOTFILES/Brewfile"
 # 5. Symlink dotfiles (before mise install, so mise reads the linked config)
 step "Symlinking dotfiles"
 cd "$DOTFILES"
-stow --target="$HOME" zsh tmux ghostty kitty aerospace starship ideavim mise tinted-theming
+stow --target="$HOME" zsh tmux ghostty kitty aerospace starship ideavim mise tinted-theming git karabiner zed tuicr
 ln -sfn "$DOTFILES/bodyclock.nvim/.config/nvim" "$HOME/.config/nvim"
 
 # 6. Runtimes via mise
@@ -64,9 +64,11 @@ gem install --no-document rails bundler
 step "Starting PostgreSQL"
 brew services start postgresql@17
 
-# 9. pi (coding agent)
+# 9. pi (coding agent) + extensions
 step "Installing pi"
 npm install -g @earendil-works/pi-coding-agent
+pi install npm:pi-subagents
+pi install npm:pi-ask-user
 
 step "Done"
 cat <<'EOF'

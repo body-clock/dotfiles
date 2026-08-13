@@ -19,3 +19,4 @@ brew "postgresql@17"
 # Apps
 cask "ghostty"
 cask "aerospace"
+cask "docker-desktop"

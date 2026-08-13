@@ -1,6 +1,6 @@
 [tools]
 ruby = "latest"
-node = "22"
+node = "22"        # bundles npm — no separate npm tool
 neovim = "0.12"
 zoxide = "latest"
 
