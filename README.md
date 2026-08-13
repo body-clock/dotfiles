@@ -30,6 +30,7 @@ git clone --recursive https://github.com/body-clock/dotfiles.git ~/dotfiles
 - `git config --global user.name "..."` / `user.email "..."` (new job identity)
 - `npm login` (re-creates `~/.npmrc` token)
 - App Store apps: install `mas`, run `mas list` on the old machine → `mas install <ids>` on the new one
+- Raycast: reinstall these extensions — Spotify Player, Obsidian, Kill Process, Slack, Pomodoro. For full settings, use Raycast's own Export → `.rayconfig` and keep that file private (it can contain snippets).
 
 ## Adding a tool (additive)
 
