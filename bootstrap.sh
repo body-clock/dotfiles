@@ -48,7 +48,7 @@ brew bundle --file="$DOTFILES/Brewfile"
 # 5. Symlink dotfiles (before mise install, so mise reads the linked config)
 step "Symlinking dotfiles"
 cd "$DOTFILES"
-stow --target="$HOME" zsh tmux ghostty kitty aerospace starship ideavim mise tinted-theming git karabiner zed tuicr
+stow --target="$HOME" zsh tmux ghostty aerospace ideavim mise tinted-theming git karabiner zed tuicr
 ln -sfn "$DOTFILES/bodyclock.nvim/.config/nvim" "$HOME/.config/nvim"
 
 # 6. Runtimes via mise

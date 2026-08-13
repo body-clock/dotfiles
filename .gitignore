@@ -1,2 +1,12 @@
 ghostty/.config/ghostty/themes
 docs/
+
+# macOS
+.DS_Store
+
+# editor/IDE junk
+.idea/
+Session.vim
+
+# agent artifacts
+.pi-subagents/
