@@ -51,6 +51,13 @@ cd "$DOTFILES"
 stow --target="$HOME" zsh tmux ghostty aerospace ideavim mise tinted-theming git karabiner zed tuicr
 ln -sfn "$DOTFILES/bodyclock.nvim/.config/nvim" "$HOME/.config/nvim"
 
+# Tinty generates the theme file referenced by Ghostty's config. A fresh
+# machine has neither Tinty's downloaded schemes/templates nor that file yet.
+step "Initializing terminal theme"
+mkdir -p "$HOME/.config/ghostty/themes"
+tinty install --quiet
+tinty apply base16-tarot --quiet
+
 # 6. Runtimes via mise
 step "Installing runtimes (mise)"
 mise install
