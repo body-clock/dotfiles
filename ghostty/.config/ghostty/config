@@ -7,5 +7,5 @@ copy-on-select = clipboard
 
 theme = "tinted-theming"
 window-decoration = false
-background-opacity = 0.85
-background-blur-radius = 70
+background-opacity = 0.90
+background-blur-radius = 100
