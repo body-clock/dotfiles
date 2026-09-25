@@ -44,3 +44,19 @@ mise use -g <tool>@<ver>    # runtime → lands in mise.toml
 ## Layout
 
 Each top-level dir is a stow package (`.config/<tool>` or home dotfiles). `bootstrap.sh` runs `stow` to symlink them into place.
+
+## tmuxinator
+
+`tmuxinator` reads `~/.config/tmuxinator/<name>.yml`, which the `tmuxinator`
+stow package provides:
+
+```sh
+tmuxinator list                 # projects defined
+tmuxinator start rails          # launch one
+tmuxinator new myapp            # scaffold another
+```
+
+`dotfiles.yml` and `rails.yml` are working references — copy one, set `root` and
+the window names, then start it. The layouts are declarative, so a project comes
+up the same way on every machine; `bootstrap.sh` installs the gem and stows the
+package.
