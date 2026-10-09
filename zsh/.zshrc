@@ -6,6 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 export ZSH="$HOME/.oh-my-zsh"
+
 export TERM="xterm-256color"
 
 ZSH_THEME="robbyrussell"
@@ -39,3 +40,19 @@ source <(fzf --zsh)
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# get/set AWS_PROFILE env var
+aws-profile () { 
+    if [ $# -gt 0 ]; then
+         export AWS_PROFILE=$1
+    fi;
+    echo $AWS_PROFILE
+}
+
+source ~/.cdl-ssm-util/session-zsh-snippet.sh
+
+# print current aws session identity
+alias aws-whoami="aws --output yaml sts get-caller-identity"
+
+# agent-sync
+export PATH="/Users/pperkins/dotfiles/agents/bin:$PATH"

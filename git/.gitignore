@@ -1,0 +1,18 @@
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+.serverless
+
+# JetBrains
+.idea
+
+# IDK what this is
+.DS_Store
+
+# Vim session
+Session.vim
+
+# Vim projections for Rails
+.projections.json

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.bodyclock.tmux-rescue</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/pperkins/dotfiles/tmux/.config/tmux/scripts/rescue-autostart.sh</string>
+  </array>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <!-- Sessions are snapshotted continuously while tmux runs, so restoring once
+       at login is enough; no need to reload this agent. -->
+  <key>KeepAlive</key>
+  <false/>
+
+  <key>ProcessType</key>
+  <string>Background</string>
+</dict>
+</plist>

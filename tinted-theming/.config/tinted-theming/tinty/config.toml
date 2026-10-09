@@ -7,7 +7,7 @@ default-scheme = "base16-tarot"      # Default theme when none is specified
 [[items]]
 path = "https://github.com/tinted-theming/tinted-terminal"    
 name = "tinted-ghostty"
-hook = "cp -f %f ~/.config/ghostty/themes/tinted-theming && osascript ~/.config/ghostty/reload.scpt >/dev/null"
+hook = "cp -f %f ~/.config/ghostty/themes/tinted-theming && osascript ~/.config/ghostty/reload.scpt"
 themes-dir = "themes/ghostty"              
 
 # tmux
@@ -17,7 +17,7 @@ name = "tinted-tmux"
 hook = "tmux source-file ~/.config/tmux/tmux.conf"
 themes-dir = "colors"
 
-# pi (coding agent)
+# pi
 [[items]]
 path = "https://github.com/body-clock/tinted-pi"
 name = "tinted-pi"
@@ -40,3 +40,10 @@ name = "tinted-fzf"
 hook = "bash ~/.config/tinted-theming/tinty/scripts/tinty-fzf-theme.sh %f"
 themes-dir = "sh"
 
+# omp
+[[items]]
+path = "~/code/tinted-omp"
+name = "tinted-omp"
+hook = "mkdir -p ~/.omp/agent/themes && cp -f \"$TINTY_THEME_FILE_PATH\" ~/.omp/agent/themes/tinted.json"
+themes-dir = "themes"
+supported-systems = ["base16", "base24"]
