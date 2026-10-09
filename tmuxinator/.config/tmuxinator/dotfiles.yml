@@ -1,0 +1,29 @@
+# dotfiles — a working reference project for this machine.
+#
+# tmuxinator reads ~/.config/tmuxinator/<name>.yml, so this file is used with:
+#   tmuxinator start dotfiles
+#
+# Copy this shape into ~/.config/tmuxinator/<project>.yml for a real project.
+# Run `tmuxinator list` to see everything defined, `tmuxinator start <name>` to
+# launch, and `tmuxinator stop <name>` to tear it down.
+
+name: dotfiles
+root: ~/dotfiles
+
+# Select the window and pane that have focus once everything is built.
+startup_window: editor
+startup_pane: 1
+
+windows:
+  - editor:
+      layout: main-vertical
+      panes:
+        # The layout is main-vertical, so the first pane is the wide one.
+        - nvim
+        - mise install
+  - shell:
+      layout: even-horizontal
+      panes:
+        - ""
+        - ""
+  - git: lazygit
