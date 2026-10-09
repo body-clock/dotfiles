@@ -70,6 +70,10 @@ npm install -g @earendil-works/pi-coding-agent
 pi install npm:pi-subagents
 pi install npm:pi-ask-user
 
+# 10. tmux rescue — login agent that rebuilds the last snapshot
+step "Installing tmux rescue agent"
+"$HOME/.config/tmux/scripts/rescue-install-agent.sh" || true
+
 step "Done"
 cat <<'EOF'
 

@@ -41,6 +41,29 @@ brew install <formula>      # system tool → add to Brewfile if it sticks
 mise use -g <tool>@<ver>    # runtime → lands in mise.toml
 ```
 
+## tmux
+
+**Rebuilding your environment** — `tmux.conf` snapshots every session, window,
+pane layout and working directory to `~/.local/share/tmux/rescue/`, refreshed
+every 15 minutes by a background loop. Press `prefix C-s` to save on demand and
+`prefix C-r` to rebuild from the last snapshot.
+
+To survive a *restart*, install the login agent once:
+
+```sh
+~/.config/tmux/scripts/rescue-install-agent.sh      # --status / --uninstall
+```
+
+It rebuilds the snapshot at login. Note the honest limit: tmux cannot outlive a
+reboot, because the server process dies with the OS. Layout, directories and
+window names come back; in-flight process state and scrollback do not, and the
+restore deliberately does not re-run commands that happened to be in the
+foreground. Real persistence means keeping the tmux server somewhere that does
+not restart — a remote host, ideally with `mosh`.
+
+The `tmux` package also carries `scripts/rescue-*.sh` (the snapshot/restore
+machinery) and `com.bodyclock.tmux-rescue.plist` (the login agent).
+
 ## Layout
 
 Each top-level dir is a stow package (`.config/<tool>` or home dotfiles). `bootstrap.sh` runs `stow` to symlink them into place.
