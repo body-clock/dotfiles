@@ -3,6 +3,7 @@
 
 # Taps
 tap "tinted-theming/tinted"
+tap "can1357/tap"
 
 # Core / shell
 brew "git"
@@ -12,6 +13,9 @@ brew "fzf"
 brew "bat"
 brew "powerlevel10k"
 brew "tinty"
+
+# Coding agent
+brew "omp"
 
 # Rails database (runs via `brew services`)
 brew "postgresql@17"

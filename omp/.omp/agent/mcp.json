@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/can1357/oh-my-pi/main/packages/coding-agent/src/config/mcp-schema.json",
+  "mcpServers": {
+    "umami": {
+      "type": "http",
+      "url": "https://analytics.printlyrics.app/mcp",
+      "headers": {
+        "Authorization": "!pass-cli item view --vault-name printlyrics --item-title 'PrintLyrics Umami API Key' --field password | sed 's/^/Bearer /'"
+      }
+    },
+    "rams": {
+      "type": "stdio",
+      "command": "/Users/pperkins/.local/share/mise/installs/node/24.14.1/bin/node",
+      "args": [
+        "/Users/pperkins/code/w/ucnrs-rams/mcp/server.mjs"
+      ],
+      "timeout": 120000,
+      "env": {
+        "RAMS_API_URL": "https://rams.ucnature.org/api/v1",
+        "RAMS_API_TOKEN": "!pass-cli item view --vault-name Personal --item-title 'RAMS Prod Demo API Key' --field note"
+      }
+    }
+  }
+}
