@@ -62,11 +62,12 @@ tinty apply base16-tarot --quiet
 step "Installing runtimes (mise)"
 mise install
 
-# 7. Rails + bundler into the mise-managed ruby, plus tmuxinator for the
-#    session templates.
+# 7. Rails + bundler into the mise-managed ruby, plus tmuxinator (session
+#    templates) and the tmux restore-on-login agent.
 step "Installing Rails, Bundler + tmuxinator"
 eval "$(mise activate bash)"
 gem install --no-document rails bundler tmuxinator
+"$HOME/.config/tmux/scripts/rescue-install-agent.sh" || true
 
 # 8. PostgreSQL as a service
 step "Starting PostgreSQL"
@@ -77,10 +78,6 @@ step "Installing pi"
 npm install -g @earendil-works/pi-coding-agent
 pi install npm:pi-subagents
 pi install npm:pi-ask-user
-
-# 10. tmux rescue — login agent that rebuilds the last snapshot
-step "Installing tmux rescue agent"
-"$HOME/.config/tmux/scripts/rescue-install-agent.sh" || true
 
 step "Done"
 cat <<'EOF'

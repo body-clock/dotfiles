@@ -43,6 +43,8 @@ mise use -g <tool>@<ver>    # runtime → lands in mise.toml
 
 ## tmux
 
+Two separate problems, two separate answers:
+
 **Rebuilding your environment** — `tmux.conf` snapshots every session, window,
 pane layout and working directory to `~/.local/share/tmux/rescue/`, refreshed
 every 15 minutes by a background loop. Press `prefix C-s` to save on demand and
@@ -61,19 +63,8 @@ restore deliberately does not re-run commands that happened to be in the
 foreground. Real persistence means keeping the tmux server somewhere that does
 not restart — a remote host, ideally with `mosh`.
 
-The `tmux` package also carries `scripts/rescue-*.sh` (the snapshot/restore
-machinery) and `com.bodyclock.tmux-rescue.plist` (the login agent).
-
-## Layout
-
-Each top-level dir is a stow package (`.config/<tool>` or home dotfiles). `bootstrap.sh` runs `stow` to symlink them into place.
-
-`omp` is the exception that names its own dir: it stows `~/.omp/agent/{config.yml,models.yml,mcp.json}`. Nothing under `~/.omp` is runtime state worth keeping — sessions, logs, caches, `agent.db` and the tinty-generated `themes/tinted.json` all stay local, so only the config surface is versioned. `omp config set` rewrites `config.yml` in place, so a symlinked file keeps its link and `/settings` edits land straight in this repo. `mcp.json` holds no secrets: credentials are shelled out to `pass-cli` at connect time.
-
-## tmuxinator
-
-`tmuxinator` reads `~/.config/tmuxinator/<name>.yml`, which the `tmuxinator`
-stow package provides:
+**Spinning up a known layout** — `tmuxinator` reads
+`~/.config/tmuxinator/<name>.yml`:
 
 ```sh
 tmuxinator list                 # projects defined
@@ -82,6 +73,14 @@ tmuxinator new myapp            # scaffold another
 ```
 
 `dotfiles.yml` and `rails.yml` are working references — copy one, set `root` and
-the window names, then start it. The layouts are declarative, so a project comes
-up the same way on every machine; `bootstrap.sh` installs the gem and stows the
-package.
+the window names, then start it. Unlike a snapshot, these are declarative and
+identical on every machine.
+
+## Layout
+
+Each top-level dir is a stow package (`.config/<tool>` or home dotfiles). `bootstrap.sh` runs `stow` to symlink them into place.
+
+The `tmux` package also carries `scripts/rescue-*.sh` (the snapshot/restore
+machinery) and `com.bodyclock.tmux-rescue.plist` (the login agent).
+
+`omp` is the exception that names its own dir: it stows `~/.omp/agent/{config.yml,models.yml,mcp.json}`. Nothing under `~/.omp` is runtime state worth keeping — sessions, logs, caches, `agent.db` and the tinty-generated `themes/tinted.json` all stay local, so only the config surface is versioned. `omp config set` rewrites `config.yml` in place, so a symlinked file keeps its link and `/settings` edits land straight in this repo. `mcp.json` holds no secrets: credentials are shelled out to `pass-cli` at connect time.
