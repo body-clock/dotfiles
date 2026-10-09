@@ -1,3 +1,15 @@
 [submodule "bodyclock.nvim"]
 	path = bodyclock.nvim
 	url = https://github.com/body-clock/bodyclock.nvim
+[submodule "tmux/.config/tmux/plugins/tinted-tmux"]
+	path = tmux/.config/tmux/plugins/tinted-tmux
+	url = https://github.com/tinted-theming/tinted-tmux.git
+[submodule "tmux/.config/tmux/plugins/tmux-sensible"]
+	path = tmux/.config/tmux/plugins/tmux-sensible
+	url = https://github.com/tmux-plugins/tmux-sensible.git
+[submodule "tmux/.config/tmux/plugins/tpm"]
+	path = tmux/.config/tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm.git
+[submodule "tmux/.config/tmux/plugins/vim-tmux-navigator"]
+	path = tmux/.config/tmux/plugins/vim-tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator.git
