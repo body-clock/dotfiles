@@ -1,0 +1,30 @@
+# rails — starting point for a Rails project.
+#
+# tmuxinator reads ~/.config/tmuxinator/<name>.yml:
+#   cp ~/.config/tmuxinator/rails.yml ~/.config/tmuxinator/myapp.yml
+#   $EDITOR ~/.config/tmuxinator/myapp.yml     # set root + window names
+#   tmuxinator start myapp
+#
+# `root` is where every pane starts. mise picks the project's Ruby up from the
+# directory itself (.ruby-version / mise.toml), so no version juggling here.
+
+name: rails
+root: ~/code/myapp
+
+startup_window: editor
+startup_pane: 1
+
+windows:
+  - editor:
+      layout: main-vertical
+      panes:
+        - nvim
+        - ""
+  - server: bin/rails server
+  - console: bin/rails console
+  - logs: tail -f log/development.log
+  - tests:
+      layout: even-horizontal
+      panes:
+        - ""
+        - ""

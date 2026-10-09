@@ -48,17 +48,25 @@ brew bundle --file="$DOTFILES/Brewfile"
 # 5. Symlink dotfiles (before mise install, so mise reads the linked config)
 step "Symlinking dotfiles"
 cd "$DOTFILES"
-stow --target="$HOME" zsh tmux ghostty aerospace ideavim mise tinted-theming git karabiner zed tuicr omp
+stow --target="$HOME" zsh tmux tmuxinator ghostty aerospace ideavim mise tinted-theming git karabiner zed tuicr omp
 ln -sfn "$DOTFILES/bodyclock.nvim/.config/nvim" "$HOME/.config/nvim"
+
+# Tinty generates the theme file referenced by Ghostty's config. A fresh
+# machine has neither Tinty's downloaded schemes/templates nor that file yet.
+step "Initializing terminal theme"
+mkdir -p "$HOME/.config/ghostty/themes"
+tinty install --quiet
+tinty apply base16-tarot --quiet
 
 # 6. Runtimes via mise
 step "Installing runtimes (mise)"
 mise install
 
-# 7. Rails + bundler into the mise-managed ruby
-step "Installing Rails + Bundler"
+# 7. Rails + bundler into the mise-managed ruby, plus tmuxinator for the
+#    session templates.
+step "Installing Rails, Bundler + tmuxinator"
 eval "$(mise activate bash)"
-gem install --no-document rails bundler
+gem install --no-document rails bundler tmuxinator
 
 # 8. PostgreSQL as a service
 step "Starting PostgreSQL"
@@ -69,6 +77,10 @@ step "Installing pi"
 npm install -g @earendil-works/pi-coding-agent
 pi install npm:pi-subagents
 pi install npm:pi-ask-user
+
+# 10. tmux rescue — login agent that rebuilds the last snapshot
+step "Installing tmux rescue agent"
+"$HOME/.config/tmux/scripts/rescue-install-agent.sh" || true
 
 step "Done"
 cat <<'EOF'
