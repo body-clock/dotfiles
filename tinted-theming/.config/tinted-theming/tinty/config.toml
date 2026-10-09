@@ -1,5 +1,6 @@
 # Global settings
-shell = "zsh -c '{}'"             # This tells Tinty how to run hooks
+# Use default shell (sh -c) for fast hook execution — zsh -c loads all startup files.
+# If you need zsh for specific hooks, add [[ -o interactive ]] || return to .zshenv.
 default-scheme = "base16-tarot"      # Default theme when none is specified
 
 # ghostty
@@ -23,6 +24,21 @@ name = "tinted-pi"
 hook = "mkdir -p ~/.pi/agent/themes && cp -f %f ~/.pi/agent/themes/tinted.json"
 themes-dir = "themes"
 supported-systems = ["base16", "base24"]
+
+# tuicr (code review TUI) — generates theme + syntax highlighting from current scheme
+[[items]]
+path = "https://github.com/body-clock/tinted-tuicr"
+name = "tinted-tuicr"
+hook = "bash ~/.local/share/tinted-theming/tinty/repos/tinted-tuicr/scripts/generate.sh"
+themes-dir = "themes"
+supported-systems = ["base16"]
+
+# fzf — generates color flags from current scheme
+[[items]]
+path = "https://github.com/tinted-theming/tinted-fzf"
+name = "tinted-fzf"
+hook = "bash ~/.config/tinted-theming/tinty/scripts/tinty-fzf-theme.sh %f"
+themes-dir = "sh"
 
 # omp
 [[items]]
