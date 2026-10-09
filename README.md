@@ -9,7 +9,7 @@ One owner per bucket, and nothing installed until you reach for it:
 | Bucket | Owner | Examples |
 |---|---|---|
 | Versioned runtimes | **mise** (`~/.config/mise/config.toml`) | ruby, node, neovim, zoxide |
-| System packages + apps | **Homebrew** (`Brewfile`) | git, tmux, fzf, ghostty, postgres |
+| System packages + apps | **Homebrew** (`Brewfile`) | git, tmux, fzf, ghostty, postgres, omp |
 | Ecosystem CLIs | native `-g` installers | pi (npm) |
 
 Tiebreaker: *would I ever want two versions, or pin it per-project? → mise. Otherwise → brew.*
@@ -67,6 +67,8 @@ machinery) and `com.bodyclock.tmux-rescue.plist` (the login agent).
 ## Layout
 
 Each top-level dir is a stow package (`.config/<tool>` or home dotfiles). `bootstrap.sh` runs `stow` to symlink them into place.
+
+`omp` is the exception that names its own dir: it stows `~/.omp/agent/{config.yml,models.yml,mcp.json}`. Nothing under `~/.omp` is runtime state worth keeping — sessions, logs, caches, `agent.db` and the tinty-generated `themes/tinted.json` all stay local, so only the config surface is versioned. `omp config set` rewrites `config.yml` in place, so a symlinked file keeps its link and `/settings` edits land straight in this repo. `mcp.json` holds no secrets: credentials are shelled out to `pass-cli` at connect time.
 
 ## tmuxinator
 

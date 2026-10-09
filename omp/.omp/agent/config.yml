@@ -1,0 +1,11 @@
+modelRoles:
+  default: "openrouter/~deepseek/deepseek-flash-latest:high"
+symbolPreset: nerd
+composer:
+  shape: band
+theme:
+  dark: tinted
+  light: tinted
+setupVersion: 2
+dev:
+  autoqaConsent: denied

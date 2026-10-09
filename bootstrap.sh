@@ -48,7 +48,7 @@ brew bundle --file="$DOTFILES/Brewfile"
 # 5. Symlink dotfiles (before mise install, so mise reads the linked config)
 step "Symlinking dotfiles"
 cd "$DOTFILES"
-stow --target="$HOME" zsh tmux tmuxinator ghostty aerospace ideavim mise tinted-theming git karabiner zed tuicr
+stow --target="$HOME" zsh tmux tmuxinator ghostty aerospace ideavim mise tinted-theming git karabiner zed tuicr omp
 ln -sfn "$DOTFILES/bodyclock.nvim/.config/nvim" "$HOME/.config/nvim"
 
 # Tinty generates the theme file referenced by Ghostty's config. A fresh
