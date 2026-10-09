@@ -10,3 +10,7 @@ Session.vim
 
 # agent artifacts
 .pi-subagents/
+
+# omp takes its config lock beside the resolved file, which is this repo once
+# ~/.omp/agent/config.yml is stowed
+omp/.omp/agent/*.lock
